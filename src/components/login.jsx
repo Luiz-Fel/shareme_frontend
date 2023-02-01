@@ -1,11 +1,15 @@
 import React from 'react'
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
 import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
+import jwt_decode from 'jwt-decode';
+
+import { client } from '../client.js'
 
 export default function Login() {
+  const navigate = useNavigate();
+
   return (
     <div className='flex justify-start items-center flex-col h-screen'>
      <div className='relative w-full h-full'>
@@ -25,18 +29,22 @@ export default function Login() {
         <div className='shadow-2xl'>
           <GoogleLogin
             onSuccess={responseGoogle => {
-              localStorage.setItem('user', JSON.stringify(responseGoogle.profileObj));
+              const data = jwt_decode(responseGoogle.credential);
+              localStorage.setItem('user', data);
 
-              const {name, googleId, imageUrl} = responseGoogle.profileObj;
+              const {name, aud, picture} = data;
 
               const doc = {
-                _id: googleId,
+                _id: aud,
                 _type: 'user',
-                userName: name,
-                image: imageUrl,
+                username: name,
+                image: picture,
               }
+              client.createIfNotExists(doc).then(() => {
+                navigate('/', { replace: true });
+              })
             }}
-            onFailure={responseGoogle => console.log(responseGoogle)}
+            onError={responseGoogle => console.log(responseGoogle)}
           />
         </div>
       </div>
