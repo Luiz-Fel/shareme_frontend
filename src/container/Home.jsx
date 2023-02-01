@@ -1,8 +1,9 @@
 import React from 'react'
-import Login from '../components/login'
 
 export default function Home() {
   return (
-    <Login />
+    <>
+    <h1>Foi</h1>
+    </>
   )
 }
