@@ -30,7 +30,7 @@ export default function Login() {
           <GoogleLogin
             onSuccess={responseGoogle => {
               const data = jwt_decode(responseGoogle.credential);
-              localStorage.setItem('user', data);
+              localStorage.setItem('user', JSON.stringify(data));
 
               const {name, aud, picture} = data;
 
@@ -41,6 +41,7 @@ export default function Login() {
                 image: picture,
               }
               client.createIfNotExists(doc).then(() => {
+
                 navigate('/', { replace: true });
               })
             }}
