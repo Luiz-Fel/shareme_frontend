@@ -55,7 +55,7 @@ export default function Home() {
           </div>
           <Sidebar 
             user={user && user}
-            closseToggle={() => setToggleSidebar(false)}
+            closeToggle={() => setToggleSidebar(false)}
           />
         </div>
        )}
