@@ -10,7 +10,7 @@ import { client } from '../client.js'
 import { userQuery } from '../utils/data.js'
 import logo from '../assets/logo.png'
 
-export default function Home() {
+function Home() {
 
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState(null);
@@ -69,3 +69,6 @@ export default function Home() {
     </div>
   )
 }
+
+
+export default Home;

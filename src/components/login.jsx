@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode';
 
 import { client } from '../client.js'
 
-export default function Login() {
+function Login() {
   const navigate = useNavigate();
 
   return (
@@ -53,3 +53,5 @@ export default function Login() {
     </div>
   )
 }
+
+export default Login;
