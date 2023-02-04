@@ -2,7 +2,9 @@ import React from 'react'
 
 function Pins() {
   return (
-    <div>Pins</div>
+    <div>
+      
+    </div>
   )
 }
 
