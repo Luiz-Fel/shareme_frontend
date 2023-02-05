@@ -36,7 +36,7 @@ function Feed() {
 
   return (
     <div>
-
+        {pins && <MasonryLayout pins={pins} />}
     </div>
   )
 }
