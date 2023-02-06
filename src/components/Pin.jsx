@@ -5,11 +5,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
 import { client, urlFor } from '../client';
+import { fetchUser } from '../utils/fetchUser';
 
 function Pin({ pin: { postedBy, image, _id, destination }}) {
 
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
+  const userInfo = fetchUser();
 
   const navigate = useNavigate();
 
