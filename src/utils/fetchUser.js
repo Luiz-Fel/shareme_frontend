@@ -3,3 +3,12 @@ export const fetchUser =  () => {
     
   return userInfo;
 };
+
+/*
+    aud -> user id
+    azp -> client id
+    exp -> expiration time
+    iat -> issued at
+    iss -> issuer
+    sub -> subject
+*/
