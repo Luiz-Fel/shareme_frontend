@@ -12,7 +12,7 @@ const categories = [
   {name: 'wallpapers' },
   {name: 'photography' },
   {name: 'gaming' },
-  {name: 'fod' },
+  {name: 'food' },
 ]
 
 function Sidebar({ user, closeToggle }) {
