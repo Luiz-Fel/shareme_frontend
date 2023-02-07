@@ -21,10 +21,10 @@ function Pins({ user }) {
             element={<Feed />} />
           <Route 
             path='/pin-detail/:pinId' 
-            element={<PinDetail user={user} />} />
+            element={<PinDetail userInfo={user} />} />
           <Route 
             path='/create-pin' 
-            element={<CreatePin user={user} />} />
+            element={<CreatePin userInfo={user} />} />
           <Route 
             path='/search' 
             element={<Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
