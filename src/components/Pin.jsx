@@ -46,12 +46,12 @@ function Pin({ pin: { postedBy, image, _id, destination, save }}) {
   }
 
   return (
-    <div classname='m-2'>
+    <div className='m-2'>
       <div
         className='relative cursor-zoom-in w-auto hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out'
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
-        onClick={() => navigate(`/pin-details/${_id}`)}
+        onClick={() => navigate(`/pin-detail/${_id}`)}
       >
 
         <img className='rounded-lg w-full' alt='user-post' src={urlFor(image).width(500).url()} />
