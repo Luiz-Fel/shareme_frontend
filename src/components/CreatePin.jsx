@@ -40,14 +40,17 @@ function CreatePin({ userInfo }) {
     }
   };
   const savePin =  () => {
-    if (title && about && destination && category && image?._id) {
 
+    
+
+
+    if (title && about && destination && category && image?._id) {
       const newPin = {
         _type: 'pin',
         title,
         about,
         destination,
-        category,
+        category: category,
         image: {
           _type: 'image',
           asset: {
@@ -155,13 +158,14 @@ function CreatePin({ userInfo }) {
               <div>
                 <p className='mb-2 font-semibold text-lg sm:text-xl'>Choose Pin Category</p>
                 <select
-                  onChange={(e) => setCategory(e.target.value)}
+                  onChange={(e) => {
+                    setCategory(e.target.value)}}
                   className='outline-none w-4/5 text-base border-gray-200 p-2 rounded-md cursor-pointer'
                 >
                   <option value="other" className='bg-white'>Select Category</option>
                   {categories.map((category) => (
                     <option 
-                      value={category} 
+                      value={category.name} 
                       className='text-base border-0 outline-none capitalize text-black bg-white'
                     >
                       {category.name}
