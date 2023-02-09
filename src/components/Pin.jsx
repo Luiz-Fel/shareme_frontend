@@ -13,7 +13,7 @@ function Pin({ pin: { postedBy, image, _id, destination, save }}) {
   const [postHovered, setPostHovered] = useState(false);
   const userInfo = fetchUser();
   const navigate = useNavigate();
-  const alreadySaved = !!(save?.filter((item) => item.postedBy._id === userInfo.aud))?.length;
+  const alreadySaved = !!(save?.filter((item) => item.postedBy._id === userInfo.sub))?.length;
 
   const savePin = (id) => {
     if(!alreadySaved) {
@@ -23,10 +23,10 @@ function Pin({ pin: { postedBy, image, _id, destination, save }}) {
         .setIfMissing({ save: [] })
         .insert('after', 'save[-1]', [{
           _key: uuidv4(),
-          userId: userInfo.aud,
+          userId: userInfo.sub,
           postedBy: {
             _type: 'postedBy',
-            _ref: userInfo.aud,
+            _ref: userInfo.sub,
           }
         }])
         .commit()
@@ -100,10 +100,10 @@ function Pin({ pin: { postedBy, image, _id, destination, save }}) {
                     className='bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:100 hover:shadow-md'
                   >
                     <BsFillArrowUpRightCircleFill />
-                    {destination.length > 20 ? destination.slice(8, 20) :  destination.slice(8)}
+                    {destination.length > 15 ? `${destination.slice(0, 15)}...` : destination}
                   </a>
                   )}
-                  {postedBy?._id === userInfo.aud && (
+                  {postedBy?._id === userInfo.sub && (
                      <button 
                         type='button' 
                         className='bg-whiteopacity-70 hover:opacity-100 text-dark font-bold p-2 text-base rounded-3xl hover:shadow-md outline-none'

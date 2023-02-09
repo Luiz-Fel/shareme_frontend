@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
 import jwt_decode from 'jwt-decode';
+import Cookies from 'universal-cookie';
 
 import { client } from '../client.js'
 
 function Login() {
   const navigate = useNavigate();
+  const cookies = new Cookies();
 
   return (
     <div className='flex justify-start items-center flex-col h-screen'>
@@ -30,12 +32,12 @@ function Login() {
           <GoogleLogin
             onSuccess={responseGoogle => {
               const data = jwt_decode(responseGoogle.credential);
-              localStorage.setItem('user', JSON.stringify(data));
+              cookies.set('user', JSON.stringify(data), { path: '/', maxAge: 36000000 });
 
-              const {name, aud, picture} = data;
+              const {name, sub, picture} = data;
 
               const doc = {
-                _id: aud,
+                _id: sub,
                 _type: 'user',
                 username: name,
                 image: picture,
