@@ -8,7 +8,7 @@ import MasonryLayout from './MasonryLayout';
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/data.js';
 import Spinner from './Spinner';
 
-function PinDetail() {
+function PinDetail({ userInfo }) {
 
   const [pins, setPins] = useState(null);
   const [pinDetails, setPinDetails] = useState(null);
@@ -16,7 +16,26 @@ function PinDetail() {
   const [addingComment, setAddingComment] = useState(false);
   const { pinId } = useParams();
 
-
+  const addComment = () => {
+    setAddingComment(true);
+    client
+      .patch(pinId)
+      .setIfMissing({ comments: [] })
+      .insert('after', 'comments[-1]', [{
+        comment, 
+        _key: uuidv4(), 
+        postedBy: {
+          _type: 'reference',
+          _ref: userInfo._id
+        }
+      }])
+      .commit()
+      .then(() => {
+        fetchPinDetails();
+        setComment('');
+        setAddingComment(false);
+      })
+    }
   const fetchPinDetails = () => {
     const query = pinDetailQuery(pinId);
 
@@ -39,8 +58,8 @@ function PinDetail() {
   }, [pinId]);
 
   if (!pinDetails) return <Spinner message='Loading pin...' />;
-  console.log(pinDetails)
   return (
+    <>
     <div className='flex xl:flex-row flex-col m-auto bg-white' style={{ maxWidth: '1500px', borderRadius: '32'}}>
       <div className='flex justify-center items-center md:items-start flex-initial'>
         <img 
@@ -79,8 +98,52 @@ function PinDetail() {
           <p className='font-semibold capitalize'>{pinDetails.postedBy.username}</p>
         </Link>
         <h2 className='mt-5 text-2xl'>Comments</h2>
+            <div className='max-h-370 overflow-y-auto'>
+              {pinDetails?.comments?.map((comment, i) => (
+                <div className='flex gap-2 mt-5 items-center bg-white rounded-lg' key={i}>
+                  <img 
+                    src={comment.postedBy?.image} 
+                    alt="user-image"
+                    className='w-10 h-10 rounded-full cursor-pointer'
+                  />
+                  <div className='flex flex-col'>
+                    <p className='font-bold'>{comment.postedBy.username}</p>
+                    <p>{comment.comment}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className='flex flex-wrap mt-6 gap-3 items'>
+            <Link to={`/profile/${pinDetails.postedBy?._id}`} >
+              <img src={userInfo?.image} alt="user-image" className='w-10 h-10 rounded-full cursor-pointer' />
+            </Link>
+            <input 
+              type="text"
+              className='flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-100'
+              placeholder='Add a comment...'
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <button
+              className='bg-red-500 text-white rounded-full px-6 py-3 font-semibold text-base outline-none'
+              onClick={addComment}
+            >
+              {addingComment ? 'Posting the comment...' : 'Post'}
+            </button>
+            </div>
       </div>
     </div>
+    {pins?.length > 0 ? (
+      <>
+        <h2 className='text-center font-bold text-2x mt-8 mb-4'>
+          More like this
+        </h2>
+        <MasonryLayout pins={pins} />
+      </>
+      ) : (
+        <Spinner message='Loading more pins...' />
+      )}
+      </>
   )
 }
 
