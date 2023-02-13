@@ -26,7 +26,7 @@ function Login() {
       />
       <div className='absolute flex flex-col justify-center items-center top-0 left-0 right-0 bottom-0 bg-blackOverlay'>
         <div className='p-6'>
-          <img src={logo} alt="shareme-logo" width='130px' />
+          <img src={logo} alt="sharenow-logo" width='130px' />
         </div>
         <div className='shadow-2xl'>
           <GoogleLogin
