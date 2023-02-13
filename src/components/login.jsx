@@ -1,12 +1,12 @@
 import React from 'react'
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
-import shareVideo from '../assets/share.mp4';
-import logo from '../assets/logowhite.png';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'universal-cookie';
 
 import { client } from '../client.js'
+import shareVideo from '../assets/share.mp4';
+import logo from '../assets/logowhite.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -56,4 +56,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default Login
