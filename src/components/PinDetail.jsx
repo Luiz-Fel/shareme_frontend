@@ -71,14 +71,16 @@ function PinDetail({ userInfo }) {
       <div className='w-full p-5 flex-1 xl:min-w-620'>
         <div className='flex items-center justify-between'>
           <div className='flex gap-2 items-center'>
-            <a 
-              className='bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark tex-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none '
+          <a 
+              className='transition-all bg-white px-3 py-2 rounded-full flex items-center justify-center gap-2 text-dark tex-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none '
               href={`${pinDetails.image?.asset?.url}?dl=`} 
               download 
               onClick={(e) => e.stopPropagation()}
             >
+            <p className='font-semibold'>Download</p>
                 <MdDownloadForOffline className='' />
             </a>
+
 
           </div>
           <a href={pinDetails.destination} target=' blank' rel='noreferrer'>
