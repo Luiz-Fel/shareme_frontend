@@ -18,12 +18,12 @@ function Navbar({ searchTerm, setSearchTerm, user }) {
           className='p-2 w-full bg-white outline-none'
         />
       </div>
-      <div className='flex gap-3'>
+      <div className='flex gap-3 justify-center items-center'>
         <Link to={`user-profile/${user?._id}`} className='hidden md:block'>
-          {user && <img src={user.image} alt="user" className='w-14 h-12 rounded-lg' />}
+          {user && <img src={user.image} alt="user" className='w-12 h-12 rounded-full mx-1'/>}
         </Link>
-        <Link to={`create-pin`} className='bg-black text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex justify-center items-center'>
-          <IoMdAdd />
+        <Link to={`create-pin`} className='bg-gray-800 text-white rounded-md w-10 h-10 flex justify-center items-center'>
+          <IoMdAdd className='w-6 h-6 mx-2'/>
         </Link>
       </div>
     </div>
