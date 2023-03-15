@@ -71,6 +71,16 @@ export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
           image
         },
       },
+      "commentsCount": count(comments),
+      comments[]{
+        comment,
+        _key,
+        postedBy->{
+          _id,
+          username,
+          image
+        },
+      }
     } `;
 
 export const pinDetailQuery = (pinId) => {
@@ -158,6 +168,16 @@ export const searchQuery = (searchTerm) => {
                 image
               },
             },
+            "commentsCount": count(comments),
+            comments[]{
+              comment,
+              _key,
+              postedBy->{
+                _id,
+                username,
+                image
+              },
+            }
           }`;
   return query;
 };
