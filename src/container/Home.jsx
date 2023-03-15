@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { HiMenu, HiTrendingUp } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, Route, Routes } from 'react-router-dom';
-import debounce from 'lodash.debounce';
+import _debounce from 'lodash/debounce';
 
 import { Sidebar, UserProfile } from '../components/index.js';
 import Pins from './Pins.jsx';
@@ -31,7 +31,7 @@ function Home() {
 
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
-    const handleScroll = debounce(() => {
+    const handleScroll = _debounce(() => {
       setOffset(scrollRef.current.scrollTop);
     }, 50);
     scrollRef.current.addEventListener('scroll', handleScroll);
