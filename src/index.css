@@ -4,11 +4,6 @@
 
 /* Path: shareme_frontend\src\index.css */
 
-body {
-    font-family: 'Lato', sans-serif;
-}
-
-
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
