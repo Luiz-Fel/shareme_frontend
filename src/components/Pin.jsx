@@ -109,7 +109,7 @@ function Pin({
           />
           <p className="font-semibold capitalize">{postedBy.username}</p>
         </Link>
-        <div className="flex justify-end gap-3 items-center">
+        <div className="flex justify-end gap-2 items-center">
           {alreadySaved ? (
             <div className="flex gap-1 items-center">
               <p className="font-bold text-black">
