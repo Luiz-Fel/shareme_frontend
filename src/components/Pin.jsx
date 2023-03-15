@@ -41,6 +41,18 @@ function Pin({
     }
   };
 
+  const unSavePin = (id) => {
+    if (alreadySaved) {
+      client
+        .patch(id)
+        .unset(["save[-1]"])
+        .commit()
+        .then(() => {
+          window.location.reload();
+        });
+    }
+  };
+
   const deletePin = (id) => {
     client.delete(id).then(() => {
       window.location.reload();
@@ -129,7 +141,6 @@ function Pin({
         </div>
       </div>
 
-
       <div className=" mt-3 mb-7 flex items-center justify-between">
         <Link
           to={`/profile/${postedBy?._id}`}
@@ -145,24 +156,45 @@ function Pin({
         <div className="flex justify-end gap-3 items-center">
           {alreadySaved ? (
             <div className="flex gap-1 items-center">
-            <p className="font-bold text-black">
-              {saveCount ? saveCount : "0"}
-            </p>
-            <AiFillHeart className="text-red-500 text-xl md:text-2xl" />
-          </div>
+              <p className="font-bold text-black">
+                {saveCount ? saveCount : "0"}
+              </p>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  unSavePin(_id);
+                }}
+              >
+                <AiFillHeart className="text-red-500 text-xl md:text-2xl" />
+              </button>
+            </div>
           ) : (
             <div className="flex gap-1 items-center">
-            <p className="font-bold text-black">
-              {saveCount ? saveCount : "0"}
-            </p>
-            <AiOutlineHeart className="text-black text-xl md:text-2xl" />
-          </div>
+              <p className="font-bold text-black">
+                {saveCount ? saveCount : "0"}
+              </p>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  savePin(_id);
+                  console.log("save");
+                }}
+              >
+                <AiOutlineHeart className="text-black text-xl md:text-2xl" />
+              </button>
+            </div>
           )}
           <div className="flex gap-1 items-center">
             <p className="font-bold text-black">
               {commentsCount ? commentsCount : "0"}
             </p>
-            <BiMessageRounded className=" text-black text-xl md:text-2xl" />
+            <Link
+              to={`/pin-detail/${_id}`}
+            >
+              <BiMessageRounded className=" text-black text-xl md:text-2xl" />
+            </Link>
           </div>
         </div>
       </div>
