@@ -15,6 +15,17 @@ function PinDetail({ userInfo }) {
   const [addingComment, setAddingComment] = useState(false);
   const { pinId } = useParams();
 
+  const pinsOptions = {
+    pins : <>
+            <h2 className="text-center font-bold text-2xl mt-8 mb-4">
+              More like this
+            </h2>
+            <MasonryLayout pins={pins} />
+          </>,
+    loading: <Spinner message="Loading pins..." />,
+    noPins: <h2 className="text-center font-bold text-2xl mt-8 mb-4">No pins avaiable</h2>
+  }
+
   const addComment = () => {
     setAddingComment(true);
     client
@@ -46,7 +57,12 @@ function PinDetail({ userInfo }) {
 
         if (data[0]) {
           const otherquery = pinDetailMorePinQuery(data[0]);
-          client.fetch(otherquery).then((res) => setPins(res));
+          if (otherquery) {
+
+            client.fetch(otherquery).then((res) => setPins(res));
+          } else {
+            setPins([]);
+          }
         }
       });
     }
@@ -149,16 +165,10 @@ function PinDetail({ userInfo }) {
           </div>
         </div>
       </div>
-      {pins?.length > 0 ? (
-        <>
-          <h2 className="text-center font-bold text-2x mt-8 mb-4">
-            More like this
-          </h2>
-          <MasonryLayout pins={pins} />
-        </>
-      ) : (
-        <Spinner message="Loading more pins..." />
-      )}
+      {pins?.length > 0 ? pinsOptions.pins : null}
+      {!pins?.length &&
+        (pins?.length === 0 ? pinsOptions.noPins : pinsOptions.loading)
+      }
     </>
   );
 }
