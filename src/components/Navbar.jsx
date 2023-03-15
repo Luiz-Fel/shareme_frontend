@@ -19,8 +19,8 @@ function Navbar({ searchTerm, setSearchTerm, user }) {
         />
       </div>
       <div className='flex gap-3 justify-center items-center'>
-        <Link to={`user-profile/${user?._id}`} className='hidden md:block'>
-          {user && <img src={user.image} alt="user" className='w-12 h-12 rounded-full mx-1'/>}
+        <Link to={`user-profile/${user?._id}`} className='hidden md:flex items-center justify-center'>
+          {user && <img src={user.image} alt="user" className=' w-11 h-11 rounded-full mx-1'/>}
         </Link>
         <Link to={`create-pin`} className='bg-gray-800 text-white rounded-md w-10 h-10 flex justify-center items-center'>
           <IoMdAdd className='w-6 h-6 mx-2'/>
