@@ -16,7 +16,7 @@ function Spinner({ message }) {
                 visible={true}
             />
 
-            <p className='text-lg text-center px-2'>{message}</p>
+            <p className='text-2xl text-center px-2'>{message}</p>
     </div>
   )
 }
