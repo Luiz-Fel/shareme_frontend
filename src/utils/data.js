@@ -126,6 +126,7 @@ export const pinDetailMorePinQuery = (pin) => {
       username,
       image
     },
+    "saveCount": count(save),
     save[]{
       _key,
       postedBy->{
@@ -134,6 +135,7 @@ export const pinDetailMorePinQuery = (pin) => {
         image
       },
     },
+    "commentsCount": count(comments),
   }`;
   return query;
 };
@@ -185,6 +187,7 @@ export const userCreatedPinsQuery = (userId) => {
       username,
       image
     },
+    "saveCount": count(save),
     save[]{
       postedBy->{
         _id,
@@ -192,6 +195,7 @@ export const userCreatedPinsQuery = (userId) => {
         image
       },
     },
+    "commentsCount": count(comments),
   }`;
   return query;
 };
@@ -210,6 +214,7 @@ export const userSavedPinsQuery = (userId) => {
       username,
       image
     },
+    "saveCount": count(save),
     save[]{
       postedBy->{
         _id,
@@ -217,6 +222,7 @@ export const userSavedPinsQuery = (userId) => {
         image
       },
     },
+    "commentsCount": count(comments),
   }`;
   return query;
 };
