@@ -63,6 +63,7 @@ export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
         username,
         image
       },
+      "saveCount": count(save),
       save[]{
         _key,
         postedBy->{
@@ -151,6 +152,7 @@ export const searchQuery = (searchTerm) => {
               username,
               image
             },
+            "saveCount": count(save),
             save[]{
               _key,
               postedBy->{
