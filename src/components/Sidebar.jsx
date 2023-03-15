@@ -36,7 +36,7 @@ function Sidebar({ user, closeToggle }) {
             <RiHomeFill />
             <span>Home</span>
           </NavLink>
-          <h3 >Discover categories</h3>
+          <h3 className='pl-5'>Discover categories</h3>
           {categories.slice(0, categories.length).map((category) => (
             <NavLink
               to={`/category/${category.name}`}
