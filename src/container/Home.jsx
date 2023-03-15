@@ -35,7 +35,11 @@ function Home() {
       setOffset(scrollRef.current.scrollTop);
     }, 50);
     scrollRef.current.addEventListener('scroll', handleScroll);
-    return () => scrollRef.current.removeEventListener('scroll', handleScroll);
+    return () => {
+      if(scrollRef.current) {
+        scrollRef.current.removeEventListener('scroll', handleScroll)
+      }
+    };
     
     
   }, [])
